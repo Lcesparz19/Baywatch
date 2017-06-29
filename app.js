@@ -16,8 +16,13 @@ const app = {
     const item = document.createElement('li')
     item.textContent = flick.name
     this.flicks[flick.id - 1] = flick.name
-    
+
+    const button = document.createElement('button')
+    button.textContent = 'Fav'
+    button.className = 'warning button'
+    item.appendChild(button)
     return item
+    
   },
 
   handleSubmit(ev) {
