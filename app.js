@@ -3,6 +3,7 @@ const app = {
     this.flicks = []
     this.max = 0
     this.list = document.querySelector(selectors.listSelector)
+    this.template = document.querySelector(selectors.templateSelector)
 
     document
       .querySelector(selectors.formSelector)
@@ -12,17 +13,50 @@ const app = {
       )
   },
 
-  renderListItem(flick) {
-    const item = document.createElement('li')
-    item.textContent = flick.name
-    this.flicks[flick.id - 1] = flick.name
+  favFlick(flick, ev) {
+    const listItem = ev.target.closest('.flick')
+    flick.fav = !flick.fav
 
-    const button = document.createElement('button')
-    button.textContent = 'Fav'
-    button.className = 'warning button'
-    item.appendChild(button)
-    return item
+    if (flick.fav) {
+      listItem.classList.add('fav')
+    } else {
+      listItem.classList.remove('fav')
+    }
+  },
+
+  removeFlick(flick, ev) {
+    // remove from the DOM
+    const listItem = ev.target.closest('.flick')
+    listItem.remove()
+
+    // remove from the array
+    const i = this.flicks.indexOf(flick)
+    this.flicks.splice(i, 1)
+  },
+
+  renderListItem(flick) {
+    const item = this.template.cloneNode(true)
+    item.classList.remove('template')
+    item.dataset.id = flick.id
+    item
+      .querySelector('.flick-name')
+      .textContent = flick.name
+
+    item
+      .querySelector('button.remove')
+      .addEventListener(
+        'click', 
+        this.removeFlick.bind(this, flick)
+      )
+
+    item
+      .querySelector('button.fav')
+      .addEventListener(
+        'click', 
+        this.favFlick.bind(this, flick)
+      )
     
+    return item
   },
 
   handleSubmit(ev) {
@@ -31,16 +65,22 @@ const app = {
     const flick = {
       id: this.max + 1,
       name: f.flickName.value,
+      fav: false,
     }
 
+    this.flicks.unshift(flick)
+
     const listItem = this.renderListItem(flick)
-    this.list.appendChild(listItem)
+    this.list
+      .insertBefore(listItem, this.list.firstElementChild)
 
     this.max ++
+    f.reset()
   },
 }
 
 app.init({
   formSelector: 'form#flick-form',
   listSelector: '#flick-list',
+  templateSelector: '.flick.template',
 })

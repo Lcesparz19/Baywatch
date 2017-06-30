@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee');
+
+html {
+  background: url(https://cdn.rawgit.com/xtbc17s3/baywatch/d4f96bdb130173bdac1da567552f246326817975/splode.jpg) no-repeat center center fixed; 
+  background-size: cover;
+}
+body {
+  background: transparent;
+  padding-top: 1rem;
+}
+h1 {
+  float: right;
+  margin-top: 0.75rem;
+  font-family: 'Bungee', cursive;
+  text-shadow: 0 0 10px #fff,
+               0 0 20px #fff,
+               0 0 30px #fff,
+               0 0 40px #62e6ff,
+               0 0 70px #62e6ff,
+               0 0 80px #62e6ff,
+               0 0 100px #209ab2,
+               0 0 150px #209ab2;
+}
+h1 small {
+  color: whitesmoke;
+  font-size: 60%;
+  text-shadow: none;
+}
+.banner {
+  position: absolute;
+}
+.banner img {
+  height: 100px;
+}
+
+.list-container {
+  background-color: whitesmoke;
+}
+
+#flick-list {
+  margin-bottom: 0;
+}
+.template {
+  display: none;
+}
+
+.flick.fav {
+  background-color: #62d9dd;
+}
+.flick + .flick {
+  border-top: 1px solid #ddd;
+}
+.flick-name {
+  padding: 0 0.5rem;
+}
+.flick .actions.button-group {
+  margin-bottom: 0;
+}
