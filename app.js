@@ -55,9 +55,31 @@ const app = {
         'click', 
         this.favFlick.bind(this, flick)
       )
+    item 
+      .querySelector('button.up')
+      .addEventListener(
+        'click',
+        this.Up.bind(this, flick)
+
+      )
     
     return item
   },
+  
+  Up(flick, ev){
+    const i = app.flicks.indexOf(flick)
+    const hold = app.flicks[i]
+    app.flicks[i] = app.flicks[i - 1]
+    app.flicks[i - 1] = hold
+    const listItem = ev.target.closest('.flick')
+    console.log(listItem)
+    console.log(this.list)
+    this.list.insertBefore(listItem, listItem.previousSibling)
+  },
+
+  Down(flick, ev){
+    
+  }
 
   handleSubmit(ev) {
     ev.preventDefault()
