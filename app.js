@@ -62,6 +62,12 @@ const app = {
         this.Up.bind(this, flick)
 
       )
+    item 
+      .querySelector('button.down')
+      .addEventListener(
+        'click',
+        this.Down.bind(this, flick)
+      )
     
     return item
   },
@@ -78,8 +84,15 @@ const app = {
   },
 
   Down(flick, ev){
-    
-  }
+    const i = app.flicks.indexOf(flick)
+    const hold = app.flicks[i]
+    app.flicks[i] = app.flicks[i - 1]
+    app.flicks[i - 1] = hold 
+    const listItem = ev.target.closest('.flick')
+    console.log(listItem)
+    console.log(this.list)
+    this.list.insertBefore(listItem.nextSibling, listItem)
+  },
 
   handleSubmit(ev) {
     ev.preventDefault()
